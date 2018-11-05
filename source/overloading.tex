@@ -1794,8 +1794,8 @@ or, if not that,
 \begin{example}
 \begin{codeblock}
 struct S {
-  auto operator<=>(const S&, const S&) = default; // \#1
-  bool operator<(const S&, const S&);             // \#2
+  auto operator<=>(const S&) = default; // \#1
+  bool operator<(const S&);             // \#2
 };
 bool b = S() < S();                               // calls \#2
 \end{codeblock}
@@ -1810,8 +1810,8 @@ and \tcode{F1} is not
 \begin{example}
 \begin{codeblock}
 struct S {
-  std::weak_ordering operator<=>(const S&, int);  // \#1
-  std::weak_ordering operator<=>(int, const S&);  // \#2
+  friend std::weak_ordering operator<=>(const S&, int);  // \#1
+  friend std::weak_ordering operator<=>(int, const S&);  // \#2
 };
 bool b = 1 < S();                                 // calls \#2
 \end{codeblock}
